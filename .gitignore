@@ -480,3 +480,4 @@ $RECYCLE.BIN/
 *.lnk
 
 HandMade/Presentation/appsettings.Production.json
+Kitchen/appsettings.Production.json
