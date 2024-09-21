@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using RecipeCategoryEnum.Entities;
 
 namespace Kitchen.Infrastructure.Entities;
 

@@ -1,6 +1,6 @@
 namespace Kitchen.Infrastructure.Enum;
 
-public enum MealType
+public enum MealTypeEnum
 {
     Breakfast = 1,
     Lunch = 2,

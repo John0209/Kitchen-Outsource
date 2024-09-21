@@ -1,6 +1,6 @@
-using Kitchen.Infrastructure.Entities;
+using RecipeCategoryEnum.Entities;
 
-namespace Kitchen.Infrastructure.Interfaces.IRepositories;
+namespace RecipeCategoryEnum.Interfaces.IRepositories;
 
 public interface IBaseRepository<T> where T : BaseEntity
 {

@@ -1,12 +1,14 @@
-// using Actor.Infrastructure.Interfaces.IRepositories;
-// using Actor.Infrastructure.Repositories.IRepositories;
-//
-// namespace Actor.Application.UnitOfWork;
-//
-// public interface IUnitOfWork : IDisposable
-// {
-//     IUserRepository UserRepository { get; }
-//     IDirectorRepository DirectorRepository { get; }
-//     IActorRepository ActorRepository { get; }
-//     public Task<int> SaveChangeAsync();
-// }
+using Kitchen.Infrastructure.Repositories.IRepositories;
+using RecipeCategoryEnum.Repositories.IRepositories;
+
+namespace Kitchen.Application.UnitOfWork;
+
+public interface IUnitOfWork : IDisposable
+{
+    IUserRepository UserRepository { get; }
+    IAdminRepository AdminRepository { get; }
+    IRecipeRepository RecipeRepository { get; }
+    IPostRepository PostRepository { get; }
+    ICommentRepository CommentRepository { get; }
+    public Task<int> SaveChangeAsync();
+}

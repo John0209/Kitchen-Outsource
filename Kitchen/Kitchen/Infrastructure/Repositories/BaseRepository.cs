@@ -1,9 +1,9 @@
-using Kitchen.Infrastructure.DbContext;
-using Kitchen.Infrastructure.Entities;
-using Kitchen.Infrastructure.Interfaces.IRepositories;
 using Microsoft.EntityFrameworkCore;
+using RecipeCategoryEnum.DbContext;
+using RecipeCategoryEnum.Entities;
+using RecipeCategoryEnum.Interfaces.IRepositories;
 
-namespace Kitchen.Infrastructure.Repositories;
+namespace RecipeCategoryEnum.Repositories;
 
 public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
 {

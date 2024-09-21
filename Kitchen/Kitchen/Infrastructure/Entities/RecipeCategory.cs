@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using Kitchen.Infrastructure.Entities;
 
-namespace Kitchen.Infrastructure.Entities;
+namespace RecipeCategoryEnum.Entities;
 
 public class RecipeCategory : BaseEntity
 {

@@ -1,10 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using MediatR;
 
-namespace Kitchen.Application.Models.Requests;
+namespace Kitchen.Application.Models.Requests.Authenticate;
 
-public class VerifyDtoRequest : IRequest<bool>
+public class RecoverRequestDto : IRequest<Unit>
 {
     [DataType(DataType.EmailAddress)] public required string Email { get; set; }
-    public required int VerifyCode { get; set; }
 }

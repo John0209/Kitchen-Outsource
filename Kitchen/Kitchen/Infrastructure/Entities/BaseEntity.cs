@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Kitchen.Infrastructure.Entities;
+namespace RecipeCategoryEnum.Entities;
 
 public class BaseEntity
 {

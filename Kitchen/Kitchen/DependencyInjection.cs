@@ -1,8 +1,9 @@
 using System.Reflection;
 using System.Text.Json.Serialization;
-using Kitchen.Infrastructure.DbContext;
-using Kitchen.Infrastructure.Interfaces.IRepositories;
-using Kitchen.Infrastructure.Repositories;
+using Kitchen.Application.UnitOfWork;
+using RecipeCategoryEnum.DbContext;
+using RecipeCategoryEnum.Interfaces.IRepositories;
+using RecipeCategoryEnum.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
@@ -25,9 +26,7 @@ public static class DependencyInjection
 
         services.AddMediatR(x => { x.RegisterServicesFromAssembly(typeof(Program).Assembly); });
 
-        //services.AddScoped<IUnitOfWork, UnitOfWork>();
-        // services.AddScoped<ICloudConfig, CloudConfig>();
-        // services.AddScoped<IMomoConfig, MomoConfig>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         services.AddControllers()
             //allow enum string value in swagger and front-end instead of int value
@@ -48,7 +47,7 @@ public static class DependencyInjection
             ops.SwaggerDoc("v1",
                 new OpenApiInfo
                 {
-                    Title = "Actor", Version = "v1", Description = "ASP NET core API for Actor project."
+                    Title = "Kitchen", Version = "v1", Description = "ASP NET core API for Kitchen project."
                 });
 
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

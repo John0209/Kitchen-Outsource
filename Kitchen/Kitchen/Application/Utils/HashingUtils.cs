@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Application.Utils
+namespace Kitchen.Application.Utils
 {
     public static class HashingUtils
     {

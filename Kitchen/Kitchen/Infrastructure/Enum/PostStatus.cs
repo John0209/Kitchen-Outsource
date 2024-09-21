@@ -1,4 +1,4 @@
-namespace Kitchen.Infrastructure.Enum;
+namespace Actor.Infrastructure.Enum;
 
 public enum PostStatus
 {

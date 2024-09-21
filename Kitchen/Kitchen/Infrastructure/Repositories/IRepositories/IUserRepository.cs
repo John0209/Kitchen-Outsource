@@ -1,12 +1,13 @@
-using Kitchen.Application.Models.Requests;
+using Kitchen.Application.Models.Requests.Authenticate;
 using Kitchen.Infrastructure.Entities;
-using Kitchen.Infrastructure.Interfaces.IRepositories;
+using RecipeCategoryEnum.Entities;
+using RecipeCategoryEnum.Interfaces.IRepositories;
 
-namespace Kitchen.Infrastructure.Repositories.IRepositories;
+namespace RecipeCategoryEnum.Repositories.IRepositories;
 
 public interface IUserRepository : IBaseRepository<User>
 {
-    public User? CheckLogin(LoginDtoRequest dto);
-    public bool CheckEmailExist(string email);
+    public User? CheckLogin(UserLoginRequestDto requestDto);
+    public (User?, bool) CheckEmailExist(string email);
     public User? VerifyCode(string email, int code);
 }

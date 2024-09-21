@@ -5,5 +5,5 @@ public enum RecipeCategoryEnum
     Daily = 1,
     Vegetarian = 2,
     Dietary = 3,
-    Exercise = 4
+    Exercise = 4,
 }

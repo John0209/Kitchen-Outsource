@@ -1,11 +1,12 @@
 using System.ComponentModel.DataAnnotations;
+using RecipeCategoryEnum.Entities;
 
 namespace Kitchen.Infrastructure.Entities;
 
 public class Recipe : BaseEntity
 {
     [MaxLength(100)] public string Title { get; set; } = string.Empty;
-    [MaxLength(100)] public string Description { get; set; } = string.Empty;
+    [MaxLength(1000)] public string Description { get; set; } = string.Empty;
     [MaxLength(300)] public string? ImageUrl { get; set; } = string.Empty;
     [MaxLength(300)] public string? VideoUrl { get; set; } = string.Empty;
     public DateTime PostDate { get; set; }

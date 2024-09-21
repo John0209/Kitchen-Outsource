@@ -1,10 +1,11 @@
 using System.ComponentModel.DataAnnotations;
+using RecipeCategoryEnum.Entities;
 
 namespace Kitchen.Infrastructure.Entities;
 
 public class Comment : BaseEntity
 {
-    [MaxLength(50)] public string? Content { get; set; }
+    [MaxLength(500)] public string? Content { get; set; }
     public DateTime CommentDate { get; set; }
     // Relation
 
