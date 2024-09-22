@@ -1,4 +1,5 @@
 using Kitchen;
+using Kitchen.Application.Gateway.Configuration;
 using Kitchen.MiddleWare;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,10 @@ builder.Services.AddCors(options =>
     });
 });
 builder.Services.AddSwaggerGen();
+
+//Third-parties gateway
+builder.Services.Configure<MomoConfig>(builder.Configuration.GetSection(MomoConfig.ConfigName));
+builder.Services.Configure<DriveConfig>(builder.Configuration.GetSection(DriveConfig.ConfigName));
 
 var app = builder.Build();
 

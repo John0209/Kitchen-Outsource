@@ -25,7 +25,7 @@ public class UpdateProfileHandler : IRequestHandler<UpdateProfileRequestDto, Uni
         user.Gender = request.Gender;
         
         _unit.UserRepository.Update(user);
-        if (await _unit.SaveChangeAsync() < 0) throw new NotFoundException("Update user profile to DB failed");
+        if (await _unit.SaveChangeAsync() < 0) throw new NotImplementException("Update user profile to DB failed");
         return Unit.Value;
     }
 }

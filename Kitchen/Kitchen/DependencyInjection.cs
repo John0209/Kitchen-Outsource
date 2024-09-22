@@ -1,6 +1,10 @@
 using System.Reflection;
 using System.Text.Json.Serialization;
+using Kitchen.Application.Gateway.Configuration;
+using Kitchen.Application.Gateway.IConfiguration;
 using Kitchen.Application.UnitOfWork;
+using Kitchen.Infrastructure.Services;
+using Kitchen.Infrastructure.Services.IServices;
 using RecipeCategoryEnum.DbContext;
 using RecipeCategoryEnum.Interfaces.IRepositories;
 using RecipeCategoryEnum.Repositories;
@@ -27,7 +31,11 @@ public static class DependencyInjection
         services.AddMediatR(x => { x.RegisterServicesFromAssembly(typeof(Program).Assembly); });
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+        services.AddScoped<IMomoConfig, MomoConfig>();
+        services.AddScoped<IDriveConfig, DriveConfig>();
+        services.AddScoped<IMomoService, MomoService>();
+        services.AddScoped<IDriveService, DriveService>();
+        
         services.AddControllers()
             //allow enum string value in swagger and front-end instead of int value
             .AddJsonOptions(options =>
