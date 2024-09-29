@@ -1,6 +1,6 @@
 using Application.ErrorHandlers;
+using Kitchen.Infrastructure.DbContext;
 using Kitchen.Infrastructure.Repositories.IRepositories;
-using RecipeCategoryEnum.DbContext;
 using RecipeCategoryEnum.Repositories.IRepositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +9,7 @@ namespace Kitchen.Application.UnitOfWork;
 public class UnitOfWork : IUnitOfWork
 {
     public UnitOfWork(AppDbContext context, IUserRepository userRepository, IAdminRepository adminRepository, IRecipeRepository recipeRepository, IPostRepository postRepository,
-        ICommentRepository commentRepository)
+        ICommentRepository commentRepository, IPlanRepository planRepository, IExpertRepository expertRepository)
     {
         _context = context;
         UserRepository = userRepository;
@@ -17,6 +17,8 @@ public class UnitOfWork : IUnitOfWork
         RecipeRepository = recipeRepository;
         PostRepository = postRepository;
         CommentRepository = commentRepository;
+        PlanRepository = planRepository;
+        ExpertRepository = expertRepository;
     }
 
     public void Dispose()
@@ -31,6 +33,8 @@ public class UnitOfWork : IUnitOfWork
     public IRecipeRepository RecipeRepository { get; }
     public IPostRepository PostRepository { get; }
     public ICommentRepository CommentRepository { get; }
+    public IPlanRepository PlanRepository { get; }
+    public IExpertRepository ExpertRepository { get; }
 
     public async Task<int> SaveChangeAsync()
     {

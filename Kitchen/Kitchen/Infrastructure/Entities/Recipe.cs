@@ -8,21 +8,19 @@ public class Recipe : BaseEntity
     [MaxLength(100)] public string Title { get; set; } = string.Empty;
     [MaxLength(1000)] public string Description { get; set; } = string.Empty;
     [MaxLength(300)] public string? ImageUrl { get; set; } = string.Empty;
-    [MaxLength(300)] public string? VideoUrl { get; set; } = string.Empty;
+    [MaxLength(300)] public string? Ingredient { get; set; } = string.Empty;
     public DateTime PostDate { get; set; }
+    public decimal FromPrice { get; set; }
+    public decimal ToPrice { get; set; }
+    public int FromCalories { get; set; }
+    public int ToCalories { get; set; }
+    
     // Relation
-
     public int PosterId { get; set; }
     public virtual Admin? Poster { get; set; }
 
-    public int IngredientId { get; set; }
-    public virtual Ingredient? Ingredient { get; set; }
-
-    public int MealTypeId { get; set; }
-    public virtual MealType? MealType { get; set; }
-
-    public int RecipeCategoryId { get; set; }
-    public virtual RecipeCategory? RecipeCategory { get; set; }
-
+    public int DietTypeId { get; set; }
+    public virtual DietType? DietType { get; set; }
+    
     public virtual ICollection<Tutorial>? Tutorials { get; set; } = new List<Tutorial>();
 }

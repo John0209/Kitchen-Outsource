@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Kitchen.Application.Handler.Authentication;
 
-public class RecoverHandler : IRequestHandler<RecoverRequestDto, Unit>
+public class RecoverHandler : IRequestHandler<RecoverRequest, Unit>
 {
     private readonly IUnitOfWork _unit;
 
@@ -16,7 +16,7 @@ public class RecoverHandler : IRequestHandler<RecoverRequestDto, Unit>
         _unit = unit;
     }
 
-    public async Task<Unit> Handle(RecoverRequestDto request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(RecoverRequest request, CancellationToken cancellationToken)
     {
         var (user, isEmailExist) = _unit.UserRepository.CheckEmailExist(request.Email);
         if (!isEmailExist) throw new BadRequestException("Email has not existed in DB");

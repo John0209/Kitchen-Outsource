@@ -1,9 +1,9 @@
+using Kitchen.Infrastructure.DbContext;
+using Kitchen.Infrastructure.Repositories.IRepositories;
 using Microsoft.EntityFrameworkCore;
-using RecipeCategoryEnum.DbContext;
 using RecipeCategoryEnum.Entities;
-using RecipeCategoryEnum.Interfaces.IRepositories;
 
-namespace RecipeCategoryEnum.Repositories;
+namespace Kitchen.Infrastructure.Repositories;
 
 public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
 {
@@ -39,6 +39,16 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     public async Task AddRangeAsync(IEnumerable<T> entity)
     {
         await DbSet.AddRangeAsync(entity);
+    }
+
+    public void UpdateRange(IEnumerable<T> entity)
+    {
+        DbSet.UpdateRange(entity);
+    }
+
+    public void RemoveRange(IEnumerable<T> entity)
+    {
+        DbSet.RemoveRange(entity);
     }
 
     public virtual async Task<T?> GetByIdAsync(int id, bool disableTracking = false)

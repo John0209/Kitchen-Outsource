@@ -6,9 +6,9 @@ namespace Kitchen.Application.Mapper;
 
 public static class PostsMapper
 {
-    public static List<GetPostsResponseDto> PostsToListGetPostsResponseDto(List<Post> dto)
+    public static List<GetPostsResponse> PostsToListGetPostsResponseDto(List<Post> dto)
     {
-        return dto.Select(x => new GetPostsResponseDto()
+        return dto.Select(x => new GetPostsResponse()
         {
             PostId = x.Id,
             Title = x.Title,
@@ -19,7 +19,7 @@ public static class PostsMapper
         }).ToList();
     }
 
-    public static GetPostDetailResponseDto PostToPostDetailResponseDto(Post dto) => new GetPostDetailResponseDto()
+    public static GetPostDetailResponse PostToPostDetailResponseDto(Post dto) => new GetPostDetailResponse()
     {
         PostId = dto.Id,
         Author = dto.Poster!.UserName,

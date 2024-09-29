@@ -1,8 +1,8 @@
 using Actor.Infrastructure.Enum;
 using Kitchen.Application.Models.Requests.Authenticate;
+using Kitchen.Infrastructure.DbContext;
 using Kitchen.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
-using RecipeCategoryEnum.DbContext;
 using RecipeCategoryEnum.Repositories;
 using RecipeCategoryEnum.Repositories.IRepositories;
 
@@ -14,10 +14,10 @@ public class UserRepository : BaseRepository<User>, IUserRepository
     {
     }
 
-    public User? CheckLogin(UserLoginRequestDto requestDto)
+    public User? CheckLogin(UserLoginRequest request)
     {
         return DbSet
-            .FirstOrDefault(x => x.Email == requestDto.Email && x.Password == requestDto.Password && x.Status == UserStatus.Verified);
+            .FirstOrDefault(x => x.Email == request.Email && x.Password == request.Password && x.Status == UserStatus.Verified);
     }
 
     public (User?, bool) CheckEmailExist(string email)
@@ -32,7 +32,8 @@ public class UserRepository : BaseRepository<User>, IUserRepository
 
     public override Task<User?> GetByIdAsync(int id, bool disableTracking = false)
     {
-        return DbSet
+        return DbSet.Include(x=> x.Plans)
             .FirstOrDefaultAsync(x => x.Id == id);
     }
+    
 }

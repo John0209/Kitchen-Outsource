@@ -20,6 +20,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Firebase.Auth" Version="1.0.0" />
+        <PackageReference Include="FirebaseAdmin" Version="3.0.1" />
+        <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
         <PackageReference Include="Google.Apis.Drive.v3" Version="1.68.0.3533" />
         <PackageReference Include="MediatR" Version="12.4.1" />
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />

@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Kitchen.Application.Handler.Forum;
 
-public class GetPostsHandler : IRequestHandler<GetPostsRequestDto, List<GetPostsResponseDto>>
+public class GetPostsHandler : IRequestHandler<GetPostsRequest, List<GetPostsResponse>>
 {
     private readonly IUnitOfWork _unit;
 
@@ -16,7 +16,7 @@ public class GetPostsHandler : IRequestHandler<GetPostsRequestDto, List<GetPosts
         _unit = unit;
     }
 
-    public async Task<List<GetPostsResponseDto>> Handle(GetPostsRequestDto request, CancellationToken cancellationToken)
+    public async Task<List<GetPostsResponse>> Handle(GetPostsRequest request, CancellationToken cancellationToken)
     {
         var posts = await _unit.PostRepository.GetPosts(request.CategoryId);
 

@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Kitchen.Application.Handler.Forum;
 
-public class GetPostDetailHandler : IRequestHandler<GetPostDetailRequestDto, GetPostDetailResponseDto>
+public class GetPostDetailHandler : IRequestHandler<GetPostDetailRequest, GetPostDetailResponse>
 {
     private readonly IUnitOfWork _unit;
 
@@ -16,7 +16,7 @@ public class GetPostDetailHandler : IRequestHandler<GetPostDetailRequestDto, Get
         _unit = unit;
     }
 
-    public async Task<GetPostDetailResponseDto> Handle(GetPostDetailRequestDto request, CancellationToken cancellationToken)
+    public async Task<GetPostDetailResponse> Handle(GetPostDetailRequest request, CancellationToken cancellationToken)
     {
         var post = await _unit.PostRepository.GetByIdAsync(request.PostId) ?? throw new BadRequestException("PostId is not found");
 

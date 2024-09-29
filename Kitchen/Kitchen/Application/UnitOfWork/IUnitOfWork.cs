@@ -10,5 +10,7 @@ public interface IUnitOfWork : IDisposable
     IRecipeRepository RecipeRepository { get; }
     IPostRepository PostRepository { get; }
     ICommentRepository CommentRepository { get; }
+    IPlanRepository PlanRepository { get; }
+    IExpertRepository ExpertRepository { get; }
     public Task<int> SaveChangeAsync();
 }

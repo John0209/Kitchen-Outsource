@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Kitchen.Application.Handler.User;
 
-public class GetUserDetailsHandler : IRequestHandler<GetUserDetailRequestDto, GetUserDetailResponseDto>
+public class GetUserDetailsHandler : IRequestHandler<GetUserDetailRequest, GetUserDetailResponse>
 {
     private readonly IUnitOfWork _unit;
 
@@ -16,7 +16,7 @@ public class GetUserDetailsHandler : IRequestHandler<GetUserDetailRequestDto, Ge
         _unit = unit;
     }
 
-    public async Task<GetUserDetailResponseDto> Handle(GetUserDetailRequestDto request, CancellationToken cancellationToken)
+    public async Task<GetUserDetailResponse> Handle(GetUserDetailRequest request, CancellationToken cancellationToken)
     {
         var user = await _unit.UserRepository.GetByIdAsync(request.UserId) ?? throw new NotFoundException("User information not found");
 

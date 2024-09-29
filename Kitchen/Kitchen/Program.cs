@@ -28,6 +28,7 @@ builder.Services.AddSwaggerGen();
 //Third-parties gateway
 builder.Services.Configure<MomoConfig>(builder.Configuration.GetSection(MomoConfig.ConfigName));
 builder.Services.Configure<DriveConfig>(builder.Configuration.GetSection(DriveConfig.ConfigName));
+builder.Services.Configure<FireBaseConfig>(builder.Configuration.GetSection(FireBaseConfig.ConfigName));
 
 var app = builder.Build();
 

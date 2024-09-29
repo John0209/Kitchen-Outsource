@@ -7,7 +7,7 @@ using RecipeCategoryEnum.Entities;
 
 namespace Kitchen.Application.Handler.Forum;
 
-public class CreatePostsHandler : IRequestHandler<CreatePostsRequestDto, Unit>
+public class CreatePostsHandler : IRequestHandler<CreatePostsRequest, Unit>
 {
     private readonly IUnitOfWork _unit;
 
@@ -16,7 +16,7 @@ public class CreatePostsHandler : IRequestHandler<CreatePostsRequestDto, Unit>
         _unit = unit;
     }
 
-    public async Task<Unit> Handle(CreatePostsRequestDto request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(CreatePostsRequest request, CancellationToken cancellationToken)
     {
         var post = new Post()
         {

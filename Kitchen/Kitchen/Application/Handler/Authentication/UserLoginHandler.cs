@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Kitchen.Application.Handler.Authentication;
 
-public class UserLoginHandler : IRequestHandler<UserLoginRequestDto, UserLoginResponseDto>
+public class UserLoginHandler : IRequestHandler<UserLoginRequest, UserLoginResponse>
 {
     private readonly IUnitOfWork _unit;
 
@@ -16,7 +16,7 @@ public class UserLoginHandler : IRequestHandler<UserLoginRequestDto, UserLoginRe
         _unit = unit;
     }
 
-    public Task<UserLoginResponseDto> Handle(UserLoginRequestDto request, CancellationToken cancellationToken)
+    public Task<UserLoginResponse> Handle(UserLoginRequest request, CancellationToken cancellationToken)
     {
         var user = _unit.UserRepository.CheckLogin(request) ??
                    throw new UnauthorizedException("Email / password is wrong or account is not verified yet");

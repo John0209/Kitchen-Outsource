@@ -1,7 +1,8 @@
 using Actor.Infrastructure.Enum;
 using Kitchen.Application.Models.Requests.Authenticate;
+using Kitchen.Infrastructure.DbContext;
+using Kitchen.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
-using RecipeCategoryEnum.DbContext;
 using RecipeCategoryEnum.Entities;
 using RecipeCategoryEnum.Repositories.IRepositories;
 
@@ -13,9 +14,9 @@ public class AdminRepository : BaseRepository<Admin>, IAdminRepository
     {
     }
 
-    public Admin? CheckLogin(AdminLoginRequestDto requestDto)
+    public Admin? CheckLogin(AdminLoginRequest request)
     {
         return DbSet
-            .FirstOrDefault(x => x.Account == requestDto.Account && x.Password == requestDto.Password);
+            .FirstOrDefault(x => x.Account == request.Account && x.Password == request.Password);
     }
 }

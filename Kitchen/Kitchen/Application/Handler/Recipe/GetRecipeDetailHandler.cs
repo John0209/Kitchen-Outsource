@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Kitchen.Application.Handler.Recipe;
 
-public class GetRecipeDetailHandler : IRequestHandler<GetRecipeDetailRequestDto, GetRecipeDetailResponseDto>
+public class GetRecipeDetailHandler : IRequestHandler<GetRecipeDetailRequest, GetRecipeDetailResponse>
 {
     private readonly IUnitOfWork _unit;
 
@@ -16,7 +16,7 @@ public class GetRecipeDetailHandler : IRequestHandler<GetRecipeDetailRequestDto,
         _unit = unit;
     }
 
-    public async Task<GetRecipeDetailResponseDto> Handle(GetRecipeDetailRequestDto detailRequest, CancellationToken cancellationToken)
+    public async Task<GetRecipeDetailResponse> Handle(GetRecipeDetailRequest detailRequest, CancellationToken cancellationToken)
     {
         var recipe = await _unit.RecipeRepository.GetByIdAsync(detailRequest.RecipeId) ?? throw new NotFoundException("Recipe is not found");
 

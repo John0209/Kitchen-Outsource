@@ -3,10 +3,11 @@ using System.Text.Json.Serialization;
 using Kitchen.Application.Gateway.Configuration;
 using Kitchen.Application.Gateway.IConfiguration;
 using Kitchen.Application.UnitOfWork;
+using Kitchen.Infrastructure.DbContext;
+using Kitchen.Infrastructure.Repositories;
+using Kitchen.Infrastructure.Repositories.IRepositories;
 using Kitchen.Infrastructure.Services;
 using Kitchen.Infrastructure.Services.IServices;
-using RecipeCategoryEnum.DbContext;
-using RecipeCategoryEnum.Interfaces.IRepositories;
 using RecipeCategoryEnum.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Any;
@@ -35,6 +36,8 @@ public static class DependencyInjection
         services.AddScoped<IDriveConfig, DriveConfig>();
         services.AddScoped<IMomoService, MomoService>();
         services.AddScoped<IDriveService, DriveService>();
+        services.AddScoped<IFireBaseConfig, FireBaseConfig>();
+        services.AddScoped<IFirebaseService, FireBaseService>();
         
         services.AddControllers()
             //allow enum string value in swagger and front-end instead of int value

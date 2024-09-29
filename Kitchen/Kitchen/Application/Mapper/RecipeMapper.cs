@@ -1,5 +1,7 @@
 using Kitchen.Application.Models.Responses.Authenticate;
+using Kitchen.Application.Models.Responses.Estimate;
 using Kitchen.Application.Models.Responses.Recipe;
+using Kitchen.Application.Models.Responses.Recipe.Dtos;
 using Kitchen.Application.Utils;
 using Kitchen.Infrastructure.Entities;
 using RecipeCategoryEnum.Entities;
@@ -8,32 +10,70 @@ namespace Kitchen.Application.Mapper;
 
 public static class RecipeMapper
 {
-    public static List<GetRecipeResponseDto> RecipesToListRecipeResponseDto(List<Recipe> dtos)
+    public static List<QuickSortRecipeResponse> RecipeToListQuickSortRecipeResponse(IEnumerable<IGrouping<string, Recipe>> groupedData)
     {
-        return dtos.Select(x => new GetRecipeResponseDto()
+        List<QuickSortRecipeResponse> recipeResponses = new List<QuickSortRecipeResponse>();
+        foreach (var group in groupedData)
+        {
+            List<QuickSortRecipeDto> recipeInfo = new List<QuickSortRecipeDto>();
+            foreach (var recipe in group)
+            {
+                QuickSortRecipeDto recipeDto = new QuickSortRecipeDto()
+                {
+                    RecipeId = recipe.Id,
+                    Description = recipe.Description,
+                    ImageUrl = recipe.ImageUrl,
+                    Title = recipe.Title,
+                };
+                recipeInfo.Add(recipeDto);
+            }
+
+            QuickSortRecipeResponse quickSortRecipeDto = new QuickSortRecipeResponse()
+            {
+                RecipeInfo = recipeInfo,
+                DietType = group.Key
+            };
+            recipeResponses.Add(quickSortRecipeDto);
+        }
+
+        return recipeResponses;
+    }
+
+    public static List<GetRecipeResponse> RecipesToListRecipeResponseDto(List<Recipe> dtos)
+    {
+        return dtos.Select(x => new GetRecipeResponse()
         {
             RecipeId = x.Id,
             ImageUrl = x.ImageUrl,
             Description = x.Description,
-            MealType = x.MealType!.TypeName,
-            Title = x.Title,
-            RecipeCategory = x.RecipeCategory!.CategoryName
+            DietType = x.DietType!.DietName,
+            Title = x.Title
         }).ToList();
     }
 
-    public static GetRecipeDetailResponseDto RecipeToRecipeDetailResponseDto(Recipe dto) => new GetRecipeDetailResponseDto()
+    public static EstimateCostResponse RecipeToEstimateResponse(Recipe dto) => new EstimateCostResponse()
     {
-        Poster = dto.Poster!.Name,
-        RecipeCategory = dto.RecipeCategory!.CategoryName,
+        FromPrice = dto.FromPrice,
+        ToPrice = dto.ToPrice,
+        FromCalories = dto.FromCalories,
+        ToCalories = dto.ToCalories,
+        DietType = dto.DietType!.DietName,
         RecipeId = dto.Id,
         Title = dto.Title,
-        MealType = dto.MealType!.TypeName,
+        Description = dto.Description,
+        ImageUrl = dto.ImageUrl
+    };
+
+    public static GetRecipeDetailResponse RecipeToRecipeDetailResponseDto(Recipe dto) => new GetRecipeDetailResponse()
+    {
+        Poster = dto.Poster!.Name,
+        DietType = dto.DietType!.DietName,
+        RecipeId = dto.Id,
+        Title = dto.Title,
         Description = dto.Description,
         ImageUrl = dto.ImageUrl,
-        VideoUrl = dto.VideoUrl,
         PostDate = DateUtils.FormatDateTimeToDatetimeV1(dto.PostDate),
-        IngredientContent = dto.Ingredient!.Content,
-        NumberOfPeople = dto.Ingredient!.NumberOfPeople,
+        Ingredient = dto.Ingredient,
         TutorialDto = ConvertToTutorialDtos(dto.Tutorials!.ToList())
     };
 

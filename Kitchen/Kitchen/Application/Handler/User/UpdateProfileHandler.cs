@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Kitchen.Application.Handler.User;
 
-public class UpdateProfileHandler : IRequestHandler<UpdateProfileRequestDto, Unit>
+public class UpdateProfileHandler : IRequestHandler<UpdateProfileRequest, Unit>
 {
     private readonly IUnitOfWork _unit;
 
@@ -14,7 +14,7 @@ public class UpdateProfileHandler : IRequestHandler<UpdateProfileRequestDto, Uni
         _unit = unit;
     }
 
-    public async Task<Unit> Handle(UpdateProfileRequestDto request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(UpdateProfileRequest request, CancellationToken cancellationToken)
     {
         var user = await _unit.UserRepository.GetByIdAsync(request.UserId) ?? throw new NotFoundException("User information not found");
 

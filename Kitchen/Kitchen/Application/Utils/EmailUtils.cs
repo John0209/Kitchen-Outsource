@@ -15,8 +15,8 @@ public static class EmailUtils
         string subject = toSubject;
         string content = toContent;
         // this is sender email
-        string fromEmail = "nguyentuanvu020901@gmail.com";
-        string fromPasswordEmail = "fhnwtwqisekdqzcr";
+        string fromEmail = "long88ka@gmail.com";
+        string fromPasswordEmail = "fbkseabpvtwrmigo";
         try
         {
             MailMessage mail = new MailMessage();

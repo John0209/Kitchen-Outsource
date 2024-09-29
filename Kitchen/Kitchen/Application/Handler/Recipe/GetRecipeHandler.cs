@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Kitchen.Application.Handler.Recipe;
 
-public class GetRecipeHandler : IRequestHandler<GetRecipeRequestDto, List<GetRecipeResponseDto>>
+public class GetRecipeHandler : IRequestHandler<GetRecipeRequest, List<GetRecipeResponse>>
 {
     private readonly IUnitOfWork _unit;
 
@@ -16,7 +16,7 @@ public class GetRecipeHandler : IRequestHandler<GetRecipeRequestDto, List<GetRec
         _unit = unit;
     }
 
-    public async Task<List<GetRecipeResponseDto>> Handle(GetRecipeRequestDto request, CancellationToken cancellationToken)
+    public async Task<List<GetRecipeResponse>> Handle(GetRecipeRequest request, CancellationToken cancellationToken)
     {
         var recipes = await _unit.RecipeRepository.GetRecipesAsync(request);
 

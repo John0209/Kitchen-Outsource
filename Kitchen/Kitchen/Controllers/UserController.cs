@@ -25,9 +25,9 @@ public class UserController : ControllerBase
     /// <param name="userId"></param>
     /// <returns></returns>
     [HttpGet("details")]
-    public async Task<ActionResult<GetUserDetailResponseDto>> UpdateProfile(int userId)
+    public async Task<ActionResult<GetUserDetailResponse>> UpdateProfile(int userId)
     {
-        var dto = new GetUserDetailRequestDto() { UserId = userId };
+        var dto = new GetUserDetailRequest() { UserId = userId };
         var result = await _mediator.Send(dto);
         return Ok(result);
     }
@@ -38,7 +38,7 @@ public class UserController : ControllerBase
     /// <param name="dto"></param>
     /// <returns></returns>
     [HttpPut]
-    public async Task<IActionResult> UpdateProfile(UpdateProfileRequestDto dto)
+    public async Task<IActionResult> UpdateProfile(UpdateProfileRequest dto)
     {
         await _mediator.Send(dto);
         return Ok(new

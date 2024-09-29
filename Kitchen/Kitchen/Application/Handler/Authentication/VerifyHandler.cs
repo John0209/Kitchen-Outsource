@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Kitchen.Application.Handler.Authentication;
 
-public class VerifyHandler : IRequestHandler<VerifyRequestDto, Unit>
+public class VerifyHandler : IRequestHandler<VerifyRequest, Unit>
 {
     private readonly IUnitOfWork _unit;
 
@@ -16,7 +16,7 @@ public class VerifyHandler : IRequestHandler<VerifyRequestDto, Unit>
         _unit = unit;
     }
 
-    public async Task<Unit> Handle(VerifyRequestDto request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(VerifyRequest request, CancellationToken cancellationToken)
     {
         var user = _unit.UserRepository.VerifyCode(request.Email, request.VerifyCode) ??
                    throw new BadRequestException("Incorrect verification code");

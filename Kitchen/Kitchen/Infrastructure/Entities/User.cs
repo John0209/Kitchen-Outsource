@@ -17,6 +17,9 @@ public class User : BaseEntity
     public GenderType? Gender { get; set; }
     public UserStatus Status { get; set; }
     public int? VerifyCode { get; set; }
+    public DateTime StartDateMember { get; set; }
+    public DateTime ExpireDateMember { get; set; }
+    public int? TotalDays { get; set; }
 
     // Relation
     public int? MembershipId { get; set; }
@@ -24,4 +27,6 @@ public class User : BaseEntity
 
     public virtual ICollection<Post>? Posts { get; set; } = new List<Post>();
     public virtual ICollection<Comment>? Comments { get; set; } = new List<Comment>();
+    public virtual ICollection<Plan>? Plans { get; set; } = new List<Plan>();
+    public virtual ICollection<Transaction>? Transactions { get; set; } = new List<Transaction>();
 }

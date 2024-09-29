@@ -24,7 +24,7 @@ public class PostsController : ControllerBase
     /// <param name="dto"></param>
     /// <returns></returns>
     [HttpPost("create")]
-    public async Task<IActionResult> CreatePosts(CreatePostsRequestDto dto)
+    public async Task<IActionResult> CreatePosts(CreatePostsRequest dto)
     {
         await _mediator.Send(dto);
         return Ok(new
@@ -41,7 +41,7 @@ public class PostsController : ControllerBase
     [HttpGet()]
     public async Task<IActionResult> GetPosts(PostCategoryEnum category)
     {
-        var dto = new GetPostsRequestDto() { CategoryId = (int)category };
+        var dto = new GetPostsRequest() { CategoryId = (int)category };
         var result = await _mediator.Send(dto);
         return Ok(result);
     }
@@ -52,7 +52,7 @@ public class PostsController : ControllerBase
     /// <param name="dto"></param>
     /// <returns></returns>
     [HttpGet("detail")]
-    public async Task<IActionResult> GetPostDetail(GetPostDetailRequestDto dto)
+    public async Task<IActionResult> GetPostDetail(GetPostDetailRequest dto)
     {
         var result = await _mediator.Send(dto);
         return Ok(result);
@@ -63,7 +63,7 @@ public class PostsController : ControllerBase
     /// <param name="dto"></param>
     /// <returns></returns>
     [HttpPatch("comment")]
-    public async Task<IActionResult> UpdateComment(UserCommentRequestDto dto)
+    public async Task<IActionResult> UpdateComment(UserCommentRequest dto)
     {
         await _mediator.Send(dto);
         return Ok(new

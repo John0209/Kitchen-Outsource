@@ -1,9 +1,7 @@
 ﻿using Application.ErrorHandlers;
 using Google.Apis.Auth.OAuth2;
-using Google.Apis.Drive.v3;
 using Google.Apis.Services;
 using Kitchen.Application.Gateway.IConfiguration;
-using Kitchen.Application.UnitOfWork;
 using Kitchen.Infrastructure.Enum;
 using Kitchen.Infrastructure.Services.IServices;
 using Newtonsoft.Json;
@@ -13,17 +11,15 @@ namespace Kitchen.Infrastructure.Services;
 public class DriveService : IDriveService
 {
     private IDriveConfig _drive;
-    private IUnitOfWork _unit;
 
-    //khởi tạo phương thức google drive
-    GoogleCredential _credential;
-    private Google.Apis.Drive.v3.DriveService _service;
-    private const string FolderId = "10p9jTn8-2v2U7c6zkhLxgatghWUcprn6";
+        //khởi tạo phương thức google drive
+        GoogleCredential _credential;
+        private Google.Apis.Drive.v3.DriveService _service;
+        private const string FolderId = "10p9jTn8-2v2U7c6zkhLxgatghWUcprn6";
 
-    public DriveService(IDriveConfig drive, IUnitOfWork unit)
+    public DriveService(IDriveConfig drive)
     {
         _drive = drive;
-        _unit = unit;
     }
 
     private void InitializeGgDrive()

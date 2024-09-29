@@ -8,7 +8,7 @@ using RecipeCategoryEnum.Entities;
 
 namespace Kitchen.Application.Handler.Forum;
 
-public class UpdateCommentHandler : IRequestHandler<UserCommentRequestDto, Unit>
+public class UpdateCommentHandler : IRequestHandler<UserCommentRequest, Unit>
 {
     private readonly IUnitOfWork _unit;
 
@@ -17,7 +17,7 @@ public class UpdateCommentHandler : IRequestHandler<UserCommentRequestDto, Unit>
         _unit = unit;
     }
 
-    public async Task<Unit> Handle(UserCommentRequestDto request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(UserCommentRequest request, CancellationToken cancellationToken)
     {
         var user = await _unit.UserRepository.GetByIdAsync(request.UserId) ?? throw new BadRequestException("UserId is not found");
         var posts = await _unit.PostRepository.GetByIdAsync(request.PostId) ?? throw new BadRequestException("PostId is not found");

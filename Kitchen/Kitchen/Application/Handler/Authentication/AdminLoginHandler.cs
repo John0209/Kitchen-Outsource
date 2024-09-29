@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Kitchen.Application.Handler.Authentication;
 
-public class AdminLoginHandler : IRequestHandler<AdminLoginRequestDto, string>
+public class AdminLoginHandler : IRequestHandler<AdminLoginRequest, string>
 {
     private readonly IUnitOfWork _unit;
 
@@ -16,7 +16,7 @@ public class AdminLoginHandler : IRequestHandler<AdminLoginRequestDto, string>
         _unit = unit;
     }
 
-    public Task<string> Handle(AdminLoginRequestDto request, CancellationToken cancellationToken)
+    public Task<string> Handle(AdminLoginRequest request, CancellationToken cancellationToken)
     {
         var admin = _unit.AdminRepository.CheckLogin(request) ??
                     throw new UnauthorizedException("Account or password is wrong");

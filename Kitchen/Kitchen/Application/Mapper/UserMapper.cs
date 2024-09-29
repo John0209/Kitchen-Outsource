@@ -8,14 +8,14 @@ namespace Kitchen.Application.Mapper;
 
 public static class UserMapper
 {
-    public static UserLoginResponseDto UserToLoginDtoResponse(User dto) => new UserLoginResponseDto()
+    public static UserLoginResponse UserToLoginDtoResponse(User dto) => new UserLoginResponse()
     {
         UserId = dto.Id,
         Name = dto.UserName,
         Email = dto.Email
     };
 
-    public static RegisterResponseDto UserToRegisterDtoResponse(User dto) => new RegisterResponseDto()
+    public static RegisterResponse UserToRegisterDtoResponse(User dto) => new RegisterResponse()
     {
         UserId = dto.Id,
         Name = dto.UserName,
@@ -23,7 +23,7 @@ public static class UserMapper
         Status = dto.Status
     };
 
-    public static GetUserDetailResponseDto UserToUserDetailResponseDto(User dto) => new GetUserDetailResponseDto()
+    public static GetUserDetailResponse UserToUserDetailResponseDto(User dto) => new GetUserDetailResponse()
     {
         UserId = dto.Id,
         UserName = dto.UserName,

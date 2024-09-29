@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Kitchen.Application.Handler.Authentication;
 
-public class PassChangeHandler : IRequestHandler<PassChangeRequestDto, Unit>
+public class PassChangeHandler : IRequestHandler<PassChangeRequest, Unit>
 {
     private readonly IUnitOfWork _unit;
 
@@ -14,7 +14,7 @@ public class PassChangeHandler : IRequestHandler<PassChangeRequestDto, Unit>
         _unit = unit;
     }
 
-    public async Task<Unit> Handle(PassChangeRequestDto request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(PassChangeRequest request, CancellationToken cancellationToken)
     {
         var user = await _unit.UserRepository.GetByIdAsync(request.UserId) ?? throw new NotFoundException("Not found user information");
 

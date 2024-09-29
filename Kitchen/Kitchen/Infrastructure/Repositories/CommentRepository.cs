@@ -1,8 +1,8 @@
 using Kitchen.Application.Models.Requests.Forum;
+using Kitchen.Infrastructure.DbContext;
 using Kitchen.Infrastructure.Entities;
 using Kitchen.Infrastructure.Repositories.IRepositories;
 using Microsoft.EntityFrameworkCore;
-using RecipeCategoryEnum.DbContext;
 using RecipeCategoryEnum.Entities;
 using RecipeCategoryEnum.Repositories;
 
@@ -14,7 +14,7 @@ public class CommentRepository : BaseRepository<Comment>, ICommentRepository
     {
     }
 
-    public Task<Comment?> GetComment(UserCommentRequestDto dto)
+    public Task<Comment?> GetComment(UserCommentRequest dto)
     {
         return DbSet.FirstOrDefaultAsync(x => x.PostId == dto.PostId && x.UserId == dto.UserId);
     }

@@ -11,7 +11,7 @@ using MediatR;
 
 namespace Kitchen.Application.Handler.Authentication;
 
-public class RegisterHandler : IRequestHandler<RegisterRequestDto, RegisterResponseDto>
+public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse>
 {
     private readonly IUnitOfWork _unit;
 
@@ -20,7 +20,7 @@ public class RegisterHandler : IRequestHandler<RegisterRequestDto, RegisterRespo
         _unit = unit;
     }
 
-    public async Task<RegisterResponseDto> Handle(RegisterRequestDto request, CancellationToken cancellationToken)
+    public async Task<RegisterResponse> Handle(RegisterRequest request, CancellationToken cancellationToken)
     {
         var isEmailExist = _unit.UserRepository.CheckEmailExist(request.Email);
         if (isEmailExist.Item2) throw new BadRequestException("Email has existed in DB");
