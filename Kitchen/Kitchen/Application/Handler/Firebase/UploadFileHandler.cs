@@ -1,5 +1,5 @@
 using Application.ErrorHandlers;
-using Kitchen.Application.Models.Requests.Drive;
+using Kitchen.Application.Models.Requests.Firebase;
 using Kitchen.Application.UnitOfWork;
 using Kitchen.Infrastructure.Enum;
 using Kitchen.Infrastructure.Services.IServices;

@@ -1,7 +1,8 @@
-namespace Actor.Infrastructure.Enum;
+namespace Kitchen.Infrastructure.Enum;
 
 public enum TransactionStatus
 {
-    Success = 1,
-    Failed = 2
+    Processing = 1,
+    Successful = 2,
+    Failed = 3
 }

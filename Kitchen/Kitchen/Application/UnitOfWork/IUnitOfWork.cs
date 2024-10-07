@@ -12,5 +12,6 @@ public interface IUnitOfWork : IDisposable
     ICommentRepository CommentRepository { get; }
     IPlanRepository PlanRepository { get; }
     IExpertRepository ExpertRepository { get; }
+    ITransactionRepository TransactionRepository { get; }
     public Task<int> SaveChangeAsync();
 }

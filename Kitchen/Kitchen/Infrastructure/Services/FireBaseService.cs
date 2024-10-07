@@ -73,4 +73,27 @@ public class FireBaseService : IFirebaseService
             throw new NotImplementException("Upload file to drive is failed, Details: " + e);
         }
     }
+
+    public async Task<string?> GetImage(string? fileName)
+    {
+        try
+        {
+            var firebaseAuthLink = await GetAuthentication();
+
+            var task = new FirebaseStorage(_configuration.Bucket, new FirebaseStorageOptions
+                {
+                    AuthTokenAsyncFactory = () => Task.FromResult(firebaseAuthLink.FirebaseToken),
+                    ThrowOnCancel = true
+                })
+                .Child(fileName)
+                .GetDownloadUrlAsync();
+
+            return await task;
+        }
+        catch (Exception e)
+        {
+            throw new NotFoundException("Message: " + e);
+            return null;
+        }
+    }
 }

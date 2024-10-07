@@ -1,7 +1,7 @@
 using Kitchen.Infrastructure.Enum;
 using MediatR;
 
-namespace Kitchen.Application.Models.Requests.Drive;
+namespace Kitchen.Application.Models.Requests.Firebase;
 
 public class UploadFileRequest : IRequest<Unit>
 {

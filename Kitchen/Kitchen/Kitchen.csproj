@@ -20,6 +20,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="EPPlus" Version="7.3.2" />
         <PackageReference Include="Firebase.Auth" Version="1.0.0" />
         <PackageReference Include="FirebaseAdmin" Version="3.0.1" />
         <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />

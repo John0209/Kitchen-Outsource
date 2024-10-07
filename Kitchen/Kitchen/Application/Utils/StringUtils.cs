@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Kitchen.Application.Utils;
 
@@ -31,7 +32,7 @@ public class StringUtils
 
         return formattedName.ToString();
     }
-    
+
     public static string GenerateRandomNumber(int length)
     {
         const string chars = "0123456789";
@@ -45,7 +46,7 @@ public class StringUtils
 
         return stringBuilder.ToString();
     }
-   
+
     public static string GenerateRandomNumberString(int length)
     {
         //const string chars = "0123456789";
@@ -59,5 +60,13 @@ public class StringUtils
         }
 
         return stringBuilder.ToString();
+    }
+
+    public static int GetMomoId(string id)
+    {
+        Regex regex = new Regex("-(\\d+)");
+        var macth = regex.Match(id);
+        if (macth.Success) return Int32.Parse(macth.Groups[1].Value);
+        return 0;
     }
 }

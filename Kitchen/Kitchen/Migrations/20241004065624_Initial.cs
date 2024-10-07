@@ -135,9 +135,10 @@ namespace Kitchen.Migrations
                     Gender = table.Column<int>(type: "int", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     VerifyCode = table.Column<int>(type: "int", nullable: true),
-                    StartDateMember = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ExpireDateMember = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StartDateMember = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ExpireDateMember = table.Column<DateTime>(type: "datetime2", nullable: true),
                     TotalDays = table.Column<int>(type: "int", nullable: true),
+                    IsMember = table.Column<bool>(type: "bit", nullable: false),
                     MembershipId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -230,6 +231,7 @@ namespace Kitchen.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TransactionCode = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true),
                     MembershipId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -302,9 +304,9 @@ namespace Kitchen.Migrations
                 columns: new[] { "Id", "Price", "ValidityPeriod" },
                 values: new object[,]
                 {
-                    { 1, 80000m, 1 },
-                    { 2, 150000m, 2 },
-                    { 3, 1600000m, 3 }
+                    { 1, 80000m, 7 },
+                    { 2, 150000m, 30 },
+                    { 3, 1600000m, 365 }
                 });
 
             migrationBuilder.InsertData(
@@ -317,36 +319,6 @@ namespace Kitchen.Migrations
                     { 3, "Knowledge" },
                     { 4, "DeliciousFood" },
                     { 5, "Explore" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Recipes",
-                columns: new[] { "Id", "Description", "DietTypeId", "FromCalories", "FromPrice", "ImageUrl", "Ingredient", "PostDate", "PosterId", "Title", "ToCalories", "ToPrice" },
-                values: new object[,]
-                {
-                    { 1, "Protein in eggs is a source of essential amino acids that play an important role in the body, especially for the development of both weight and height in children. Protein in eggs helps maintain and repair body tissues, including muscles. Lecithin helps lose weight, breaks down and disperses fat in food. In addition, eggs contain many vitamins and minerals necessary for the brain and nervous system to function effectively. Vitamin A, B12 and selenium in eggs help strengthen the immune system. Choline in eggs plays an important role in breaking down the amino acid homocysteine, a key cause of heart disease. Folic acid in eggs helps prevent birth defects in children, and lutein and zeaxanthin prevent macular degeneration. In addition, protein in eggs will help you feel full longer, limit frequent hunger, and reduce calories in the body.", 1, 500, 30000m, "", "4 chicken eggs.1 Onion.1/2 carrot.Green onions 2 branches", new DateTime(2024, 9, 29, 21, 49, 2, 807, DateTimeKind.Local).AddTicks(8103), 1, "Vegetable egg rolls", 800, 70000m },
-                    { 2, "Protein in eggs is a source of essential amino acids that play an important role in the body, especially for the development of both weight and height in children. Protein in eggs helps maintain and repair body tissues, including muscles. Lecithin helps lose weight, breaks down and disperses fat in food. In addition, eggs contain many vitamins and minerals necessary for the brain and nervous system to function effectively. Vitamin A, B12 and selenium in eggs help strengthen the immune system. Choline in eggs plays an important role in breaking down the amino acid homocysteine, a key cause of heart disease. Folic acid in eggs helps prevent birth defects in children, and lutein and zeaxanthin prevent macular degeneration. In addition, protein in eggs will help you feel full longer, limit frequent hunger, and reduce calories in the body.", 2, 500, 30000m, "", "4 chicken eggs.1 Onion.1/2 carrot.Green onions 2 branches", new DateTime(2024, 9, 29, 21, 49, 2, 807, DateTimeKind.Local).AddTicks(8116), 1, "Vegetable egg rolls", 800, 70000m },
-                    { 3, "Protein in eggs is a source of essential amino acids that play an important role in the body, especially for the development of both weight and height in children. Protein in eggs helps maintain and repair body tissues, including muscles. Lecithin helps lose weight, breaks down and disperses fat in food. In addition, eggs contain many vitamins and minerals necessary for the brain and nervous system to function effectively. Vitamin A, B12 and selenium in eggs help strengthen the immune system. Choline in eggs plays an important role in breaking down the amino acid homocysteine, a key cause of heart disease. Folic acid in eggs helps prevent birth defects in children, and lutein and zeaxanthin prevent macular degeneration. In addition, protein in eggs will help you feel full longer, limit frequent hunger, and reduce calories in the body.", 3, 500, 30000m, "", "4 chicken eggs.1 Onion.1/2 carrot.Green onions 2 branches", new DateTime(2024, 9, 29, 21, 49, 2, 807, DateTimeKind.Local).AddTicks(8118), 1, "Vegetable egg rolls", 800, 70000m },
-                    { 4, "Protein in eggs is a source of essential amino acids that play an important role in the body, especially for the development of both weight and height in children. Protein in eggs helps maintain and repair body tissues, including muscles. Lecithin helps lose weight, breaks down and disperses fat in food. In addition, eggs contain many vitamins and minerals necessary for the brain and nervous system to function effectively. Vitamin A, B12 and selenium in eggs help strengthen the immune system. Choline in eggs plays an important role in breaking down the amino acid homocysteine, a key cause of heart disease. Folic acid in eggs helps prevent birth defects in children, and lutein and zeaxanthin prevent macular degeneration. In addition, protein in eggs will help you feel full longer, limit frequent hunger, and reduce calories in the body.", 4, 500, 30000m, "", "4 chicken eggs.1 Onion.1/2 carrot.Green onions 2 branches", new DateTime(2024, 9, 29, 21, 49, 2, 807, DateTimeKind.Local).AddTicks(8120), 1, "Vegetable egg rolls", 800, 70000m },
-                    { 5, "Protein in eggs is a source of essential amino acids that play an important role in the body, especially for the development of both weight and height in children. Protein in eggs helps maintain and repair body tissues, including muscles. Lecithin helps lose weight, breaks down and disperses fat in food. In addition, eggs contain many vitamins and minerals necessary for the brain and nervous system to function effectively. Vitamin A, B12 and selenium in eggs help strengthen the immune system. Choline in eggs plays an important role in breaking down the amino acid homocysteine, a key cause of heart disease. Folic acid in eggs helps prevent birth defects in children, and lutein and zeaxanthin prevent macular degeneration. In addition, protein in eggs will help you feel full longer, limit frequent hunger, and reduce calories in the body.", 1, 500, 30000m, "", "4 chicken eggs.1 Onion.1/2 carrot.Green onions 2 branches", new DateTime(2024, 9, 29, 21, 49, 2, 807, DateTimeKind.Local).AddTicks(8122), 1, "Vegetable egg rolls", 800, 70000m }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Tutorials",
-                columns: new[] { "Id", "RecipeId", "StepContent", "StepTile" },
-                values: new object[,]
-                {
-                    { 1, 1, "Peel the carrots, wash them and cut them into long pieces\nCut off the 2 ends and then remove the fibers from both sides of the string beans, rinse with water and put in a basket to drain.\nPut the pot on the stove, add 200ml of water, boil over high heat. When the water boils, add 1/2 teaspoon of salt to the pot. Add carrots and string beans to a pot of boiling water and boil for about 5-7 minutes. Remove to a bowl of ice cold water and soak for 5 minutes, then remove to a plate to drain. Beat the eggs", "Step 1 - Prepare vegetables" },
-                    { 2, 1, "Crack 4 eggs into a clean bowl, season with 1 tablespoon of seasoning powder, beat well until the yolks and whites blend together.", "Step 2 - Crack" },
-                    { 3, 1, "Place the pan on the stove, turn on medium heat and add 1 tablespoon of cooking oil to the pan\nWait for the oil to heat up, then add the eggs and fry for about 3-5 minutes\nWhen the eggs are cooked, put them on a plate, use a spoon to spread the raw sausage on top of the eggs, then add the string beans and carrots, use your hands to roll the ingredients tightly", "Step 3 - Frie eggs" },
-                    { 4, 1, "Put the water on the stove, place the steamer basket on the pot, put the rolled eggs in the basket and steam for 7-10 minutes. Wait for the water to boil, then slice the eggs into circles about 1 inch long, arrange them on a plate to enjoy", "Step 4 - Put the water" },
-                    { 5, 2, "Peel the carrots, wash them and cut them into long pieces\nCut off the 2 ends and then remove the fibers from both sides of the string beans, rinse with water and put in a basket to drain.\nPut the pot on the stove, add 200ml of water, boil over high heat. When the water boils, add 1/2 teaspoon of salt to the pot. Add carrots and string beans to a pot of boiling water and boil for about 5-7 minutes. Remove to a bowl of ice cold water and soak for 5 minutes, then remove to a plate to drain. Beat the eggs", "Step 1 - Prepare vegetables" },
-                    { 6, 2, "Peel the carrots, wash them and cut them into long pieces\nCut off the 2 ends and then remove the fibers from both sides of the string beans, rinse with water and put in a basket to drain.\nPut the pot on the stove, add 200ml of water, boil over high heat. When the water boils, add 1/2 teaspoon of salt to the pot. Add carrots and string beans to a pot of boiling water and boil for about 5-7 minutes. Remove to a bowl of ice cold water and soak for 5 minutes, then remove to a plate to drain. Beat the eggs", "Step 1 - Prepare vegetables" },
-                    { 7, 3, "Peel the carrots, wash them and cut them into long pieces\nCut off the 2 ends and then remove the fibers from both sides of the string beans, rinse with water and put in a basket to drain.\nPut the pot on the stove, add 200ml of water, boil over high heat. When the water boils, add 1/2 teaspoon of salt to the pot. Add carrots and string beans to a pot of boiling water and boil for about 5-7 minutes. Remove to a bowl of ice cold water and soak for 5 minutes, then remove to a plate to drain. Beat the eggs", "Step 1 - Prepare vegetables" },
-                    { 8, 3, "Peel the carrots, wash them and cut them into long pieces\nCut off the 2 ends and then remove the fibers from both sides of the string beans, rinse with water and put in a basket to drain.\nPut the pot on the stove, add 200ml of water, boil over high heat. When the water boils, add 1/2 teaspoon of salt to the pot. Add carrots and string beans to a pot of boiling water and boil for about 5-7 minutes. Remove to a bowl of ice cold water and soak for 5 minutes, then remove to a plate to drain. Beat the eggs", "Step 1 - Prepare vegetables" },
-                    { 9, 4, "Peel the carrots, wash them and cut them into long pieces\nCut off the 2 ends and then remove the fibers from both sides of the string beans, rinse with water and put in a basket to drain.\nPut the pot on the stove, add 200ml of water, boil over high heat. When the water boils, add 1/2 teaspoon of salt to the pot. Add carrots and string beans to a pot of boiling water and boil for about 5-7 minutes. Remove to a bowl of ice cold water and soak for 5 minutes, then remove to a plate to drain. Beat the eggs", "Step 1 - Prepare vegetables" },
-                    { 10, 5, "Peel the carrots, wash them and cut them into long pieces\nCut off the 2 ends and then remove the fibers from both sides of the string beans, rinse with water and put in a basket to drain.\nPut the pot on the stove, add 200ml of water, boil over high heat. When the water boils, add 1/2 teaspoon of salt to the pot. Add carrots and string beans to a pot of boiling water and boil for about 5-7 minutes. Remove to a bowl of ice cold water and soak for 5 minutes, then remove to a plate to drain. Beat the eggs", "Step 1 - Prepare vegetables" },
-                    { 11, 5, "Peel the carrots, wash them and cut them into long pieces\nCut off the 2 ends and then remove the fibers from both sides of the string beans, rinse with water and put in a basket to drain.\nPut the pot on the stove, add 200ml of water, boil over high heat. When the water boils, add 1/2 teaspoon of salt to the pot. Add carrots and string beans to a pot of boiling water and boil for about 5-7 minutes. Remove to a bowl of ice cold water and soak for 5 minutes, then remove to a plate to drain. Beat the eggs", "Step 2 - Prepare vegetables" }
                 });
 
             migrationBuilder.CreateIndex(

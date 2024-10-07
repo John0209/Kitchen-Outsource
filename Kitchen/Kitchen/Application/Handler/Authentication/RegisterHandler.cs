@@ -34,13 +34,14 @@ public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse
             CreateDate = DateTime.Now,
             Status = UserStatus.Waiting,
             VerifyCode = int.Parse(verifyCode),
+            IsMember = false
         };
 
         await _unit.UserRepository.AddAsync(user);
         var result = await _unit.SaveChangeAsync();
         if (result > 0)
         {
-           EmailUtils.SendVerifyCodeToEmail(user);
+            //EmailUtils.SendVerifyCodeToEmail(user);
             return UserMapper.UserToRegisterDtoResponse(user);
         }
 

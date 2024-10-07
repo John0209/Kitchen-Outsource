@@ -17,9 +17,10 @@ public class User : BaseEntity
     public GenderType? Gender { get; set; }
     public UserStatus Status { get; set; }
     public int? VerifyCode { get; set; }
-    public DateTime StartDateMember { get; set; }
-    public DateTime ExpireDateMember { get; set; }
+    public DateTime? StartDateMember { get; set; }
+    public DateTime? ExpireDateMember { get; set; }
     public int? TotalDays { get; set; }
+    public bool IsMember { get; set; }
 
     // Relation
     public int? MembershipId { get; set; }

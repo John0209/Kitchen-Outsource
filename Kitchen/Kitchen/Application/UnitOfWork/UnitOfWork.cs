@@ -9,7 +9,7 @@ namespace Kitchen.Application.UnitOfWork;
 public class UnitOfWork : IUnitOfWork
 {
     public UnitOfWork(AppDbContext context, IUserRepository userRepository, IAdminRepository adminRepository, IRecipeRepository recipeRepository, IPostRepository postRepository,
-        ICommentRepository commentRepository, IPlanRepository planRepository, IExpertRepository expertRepository)
+        ICommentRepository commentRepository, IPlanRepository planRepository, IExpertRepository expertRepository, ITransactionRepository transactionRepository)
     {
         _context = context;
         UserRepository = userRepository;
@@ -19,6 +19,7 @@ public class UnitOfWork : IUnitOfWork
         CommentRepository = commentRepository;
         PlanRepository = planRepository;
         ExpertRepository = expertRepository;
+        TransactionRepository = transactionRepository;
     }
 
     public void Dispose()
@@ -35,6 +36,7 @@ public class UnitOfWork : IUnitOfWork
     public ICommentRepository CommentRepository { get; }
     public IPlanRepository PlanRepository { get; }
     public IExpertRepository ExpertRepository { get; }
+    public ITransactionRepository TransactionRepository { get; }
 
     public async Task<int> SaveChangeAsync()
     {

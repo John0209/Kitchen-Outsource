@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
-namespace Application.Dtos.Request.Order.Momo
+namespace Kitchen.Application.Models.Requests.Momo
 {
-    public class MomoResultRequest
+    public class MomoResultRequest : IRequest<Unit>
     {
         public string partnerCode { get; set; } = "";
         public string orderId { get; set; } = "";
