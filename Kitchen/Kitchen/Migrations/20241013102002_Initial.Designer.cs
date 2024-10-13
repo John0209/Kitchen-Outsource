@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kitchen.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241004065624_Initial")]
+    [Migration("20241013102002_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -64,7 +64,6 @@ namespace Kitchen.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DietName")
-                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
@@ -104,17 +103,14 @@ namespace Kitchen.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -141,7 +137,7 @@ namespace Kitchen.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<int>("ValidityPeriod")
                         .HasColumnType("int");
@@ -180,7 +176,6 @@ namespace Kitchen.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Content")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -206,7 +201,6 @@ namespace Kitchen.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
@@ -217,7 +211,7 @@ namespace Kitchen.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("FromPrice")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("ImageUrl")
                         .HasMaxLength(300)
@@ -234,7 +228,6 @@ namespace Kitchen.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -242,7 +235,7 @@ namespace Kitchen.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("ToPrice")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.HasKey("Id");
 
@@ -268,7 +261,6 @@ namespace Kitchen.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("TransactionCode")
-                        .IsRequired()
                         .HasMaxLength(8)
                         .HasColumnType("nvarchar(8)");
 
@@ -310,7 +302,6 @@ namespace Kitchen.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -323,16 +314,11 @@ namespace Kitchen.Migrations
                     b.Property<bool>("IsMember")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("MembershipId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -342,11 +328,10 @@ namespace Kitchen.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TotalDays")
+                    b.Property<int>("TotalDays")
                         .HasColumnType("int");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -355,9 +340,23 @@ namespace Kitchen.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MembershipId");
-
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "",
+                            Avarta = "",
+                            CreateDate = new DateTime(2024, 10, 13, 17, 20, 2, 126, DateTimeKind.Local).AddTicks(4813),
+                            Email = "long88ka@gmail.com",
+                            IsMember = false,
+                            Password = "12345",
+                            PhoneNumber = "0397528860",
+                            Status = 2,
+                            TotalDays = 0,
+                            UserName = "John Vũ"
+                        });
                 });
 
             modelBuilder.Entity("RecipeCategoryEnum.Entities.Admin", b =>
@@ -369,17 +368,14 @@ namespace Kitchen.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Account")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -406,7 +402,6 @@ namespace Kitchen.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Content")
-                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
@@ -427,7 +422,6 @@ namespace Kitchen.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -449,7 +443,6 @@ namespace Kitchen.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CategoryName")
-                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
@@ -497,12 +490,10 @@ namespace Kitchen.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("StepContent")
-                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("StepTile")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -575,15 +566,6 @@ namespace Kitchen.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Kitchen.Infrastructure.Entities.User", b =>
-                {
-                    b.HasOne("Kitchen.Infrastructure.Entities.Membership", "Membership")
-                        .WithMany("Users")
-                        .HasForeignKey("MembershipId");
-
-                    b.Navigation("Membership");
-                });
-
             modelBuilder.Entity("RecipeCategoryEnum.Entities.Post", b =>
                 {
                     b.HasOne("RecipeCategoryEnum.Entities.PostCategory", "PostCategory")
@@ -622,8 +604,6 @@ namespace Kitchen.Migrations
             modelBuilder.Entity("Kitchen.Infrastructure.Entities.Membership", b =>
                 {
                     b.Navigation("Transactions");
-
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("Kitchen.Infrastructure.Entities.Recipe", b =>

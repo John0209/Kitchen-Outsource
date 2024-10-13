@@ -1,14 +1,17 @@
 using System.Reflection;
 using System.Text.Json.Serialization;
+using Hangfire;
+using Hangfire.MemoryStorage;
 using Kitchen.Application.Gateway.Configuration;
 using Kitchen.Application.Gateway.IConfiguration;
+using Kitchen.Application.Handler.Transaction;
 using Kitchen.Application.UnitOfWork;
 using Kitchen.Infrastructure.DbContext;
 using Kitchen.Infrastructure.Repositories;
 using Kitchen.Infrastructure.Repositories.IRepositories;
 using Kitchen.Infrastructure.Services;
 using Kitchen.Infrastructure.Services.IServices;
-using RecipeCategoryEnum.Repositories;
+using Kitchen.MiddleWare;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
@@ -38,7 +41,9 @@ public static class DependencyInjection
         services.AddScoped<IDriveService, DriveService>();
         services.AddScoped<IFireBaseConfig, FireBaseConfig>();
         services.AddScoped<IFirebaseService, FireBaseService>();
-        
+        services.AddScoped<CakeTransactionHandler>();
+        services.AddScoped<HangfireJobScheduler>();
+
         services.AddControllers()
             //allow enum string value in swagger and front-end instead of int value
             .AddJsonOptions(options =>
@@ -58,13 +63,19 @@ public static class DependencyInjection
             ops.SwaggerDoc("v1",
                 new OpenApiInfo
                 {
-                    Title = "Kitchen", Version = "v1", Description = "ASP NET core API for Kitchen project."
+                    Title = "Kitchen",
+                    Version = "v1",
+                    Description = "ASP NET core API for Kitchen project."
                 });
 
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
             ops.IncludeXmlComments(xmlPath);
         });
+
+        //Add hangfire
+        services.AddHangfire(cf => cf.UseMemoryStorage());
+        services.AddHangfireServer();
         return services;
     }
 }

@@ -41,7 +41,7 @@ public class RegisterHandler : IRequestHandler<RegisterRequest, RegisterResponse
         var result = await _unit.SaveChangeAsync();
         if (result > 0)
         {
-            //EmailUtils.SendVerifyCodeToEmail(user);
+            EmailUtils.SendVerifyCodeToEmail(user);
             return UserMapper.UserToRegisterDtoResponse(user);
         }
 

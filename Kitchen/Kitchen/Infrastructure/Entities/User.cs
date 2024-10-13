@@ -18,13 +18,9 @@ public class User : BaseEntity
     public UserStatus Status { get; set; }
     public int? VerifyCode { get; set; }
     public DateTime? StartDateMember { get; set; }
-    public DateTime? ExpireDateMember { get; set; }
-    public int? TotalDays { get; set; }
-    public bool IsMember { get; set; }
-
-    // Relation
-    public int? MembershipId { get; set; }
-    public virtual Membership? Membership { get; set; }
+    public DateTime? ExpireDateMember { get; set; } 
+    public int TotalDays { get; set; } = 0;
+    public bool IsMember { get; set; } = false;
 
     public virtual ICollection<Post>? Posts { get; set; } = new List<Post>();
     public virtual ICollection<Comment>? Comments { get; set; } = new List<Comment>();

@@ -19,9 +19,9 @@ namespace Kitchen.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Account = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Account = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -34,7 +34,7 @@ namespace Kitchen.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DietName = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
+                    DietName = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -47,9 +47,9 @@ namespace Kitchen.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -76,11 +76,38 @@ namespace Kitchen.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryName = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
+                    CategoryName = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PostCategories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Avarta = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    VerifyCode = table.Column<int>(type: "int", nullable: true),
+                    StartDateMember = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ExpireDateMember = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TotalDays = table.Column<int>(type: "int", nullable: false),
+                    IsMember = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -89,8 +116,8 @@ namespace Kitchen.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     ImageUrl = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
                     Ingredient = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
                     PostDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -119,67 +146,13 @@ namespace Kitchen.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Avarta = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Gender = table.Column<int>(type: "int", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    VerifyCode = table.Column<int>(type: "int", nullable: true),
-                    StartDateMember = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ExpireDateMember = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TotalDays = table.Column<int>(type: "int", nullable: true),
-                    IsMember = table.Column<bool>(type: "bit", nullable: false),
-                    MembershipId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_Membership_MembershipId",
-                        column: x => x.MembershipId,
-                        principalTable: "Membership",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Tutorials",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StepTile = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    StepContent = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    RecipeId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tutorials", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Tutorials_Recipes_RecipeId",
-                        column: x => x.RecipeId,
-                        principalTable: "Recipes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Plan",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Day = table.Column<int>(type: "int", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -198,8 +171,8 @@ namespace Kitchen.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     ImageUrl = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
                     PostDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
@@ -230,7 +203,7 @@ namespace Kitchen.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TransactionCode = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
+                    TransactionCode = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true),
                     MembershipId = table.Column<int>(type: "int", nullable: true)
@@ -248,6 +221,27 @@ namespace Kitchen.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tutorials",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StepTile = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    StepContent = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    RecipeId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tutorials", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tutorials_Recipes_RecipeId",
+                        column: x => x.RecipeId,
+                        principalTable: "Recipes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -321,6 +315,11 @@ namespace Kitchen.Migrations
                     { 5, "Explore" }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Address", "Avarta", "CreateDate", "DateOfBirth", "Email", "ExpireDateMember", "Gender", "IsMember", "Password", "PhoneNumber", "StartDateMember", "Status", "TotalDays", "UserName", "VerifyCode" },
+                values: new object[] { 1, "", "", new DateTime(2024, 10, 13, 17, 20, 2, 126, DateTimeKind.Local).AddTicks(4813), null, "long88ka@gmail.com", null, null, false, "12345", "0397528860", null, 2, 0, "John Vũ", null });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_PostId",
                 table: "Comments",
@@ -370,11 +369,6 @@ namespace Kitchen.Migrations
                 name: "IX_Tutorials_RecipeId",
                 table: "Tutorials",
                 column: "RecipeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_MembershipId",
-                table: "Users",
-                column: "MembershipId");
         }
 
         /// <inheritdoc />
@@ -399,6 +393,9 @@ namespace Kitchen.Migrations
                 name: "Posts");
 
             migrationBuilder.DropTable(
+                name: "Membership");
+
+            migrationBuilder.DropTable(
                 name: "Recipes");
 
             migrationBuilder.DropTable(
@@ -412,9 +409,6 @@ namespace Kitchen.Migrations
 
             migrationBuilder.DropTable(
                 name: "DietTypes");
-
-            migrationBuilder.DropTable(
-                name: "Membership");
         }
     }
 }

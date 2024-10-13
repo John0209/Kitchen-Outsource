@@ -14,4 +14,8 @@ public class GetUserDetailResponse
     public string? CreateDate { get; set; }
     public GenderType? Gender { get; set; }
     public UserStatus Status { get; set; }
+    public DateTime? StartDateMember { get; set; }
+    public DateTime? ExpireDateMember { get; set; }
+    public int? TotalDays { get; set; }
+    public bool IsMember { get; set; }
 }

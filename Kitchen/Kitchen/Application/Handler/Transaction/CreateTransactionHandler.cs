@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Kitchen.Application.Handler.Transaction;
 
-public class CreateTransactionHandler : IRequestHandler<CreateTransactionRequest, int>
+public class CreateTransactionHandler : IRequestHandler<CreateTransactionRequest, Infrastructure.Entities.Transaction>
 {
     private readonly IUnitOfWork _unit;
 
@@ -16,20 +16,20 @@ public class CreateTransactionHandler : IRequestHandler<CreateTransactionRequest
         _unit = unit;
     }
 
-    public async Task<int> Handle(CreateTransactionRequest request, CancellationToken cancellationToken)
+    public async Task<Infrastructure.Entities.Transaction> Handle(CreateTransactionRequest request, CancellationToken cancellationToken)
     {
         var transaction = new Infrastructure.Entities.Transaction()
         {
             MembershipId = request.MembershipId,
             UserId = request.UserId,
             TransactionDate = DateTime.Now,
-            TransactionCode = StringUtils.GenerateRandomNumber(8),
+            TransactionCode = StringUtils.GenerateRandomNumber(6),
             Status = TransactionStatus.Processing
         };
 
         await _unit.TransactionRepository.AddAsync(transaction);
         if (await _unit.SaveChangeAsync() < 0) throw new NotImplementException("Add new transaction to DB failed");
 
-        return transaction.Id;
+        return transaction;
     }
 }

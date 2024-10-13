@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Kitchen.Application.Models.Requests.Momo
+namespace Kitchen.Application.Models.Requests.Payment
 {
     public class MomoResultRequest : IRequest<Unit>
     {

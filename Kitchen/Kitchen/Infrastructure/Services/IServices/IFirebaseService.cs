@@ -1,6 +1,4 @@
-﻿using Kitchen.Application.Models.Requests.Momo;
-
-namespace Kitchen.Infrastructure.Services.IServices;
+﻿namespace Kitchen.Infrastructure.Services.IServices;
 
 public interface IFirebaseService
 {

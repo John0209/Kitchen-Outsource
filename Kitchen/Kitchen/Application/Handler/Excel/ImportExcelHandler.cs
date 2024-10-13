@@ -36,7 +36,7 @@ public class ImportExcelHandler : IRequestHandler<ImportExcelRequest, Unit>
                 // Khởi tạo list recipes để add vào database
                 int number = 1;
                 var recipes = new List<Infrastructure.Entities.Recipe>();
-                for (int row = 7; row <= rowCount; row++)
+                for (int row = 2; row <= rowCount; row++)
                 {
                     var recipeDto = new Infrastructure.Entities.Recipe()
                     {
@@ -45,7 +45,7 @@ public class ImportExcelHandler : IRequestHandler<ImportExcelRequest, Unit>
                         ImageUrl = await GetImageFromFirebase(number, UploadType.Recipe)
                     };
 
-                    for (int col = 2; col <= 11; col++)
+                    for (int col = 1; col <= 10; col++)
                     {
                         var cellTitle = worksheet.Cells[6, col].Text.Trim(); // Lấy giá trị title
                         var cellValue = worksheet.Cells[row, col].Text.Trim(); // Lấy giá trị ô

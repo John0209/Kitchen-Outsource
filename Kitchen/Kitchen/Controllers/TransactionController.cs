@@ -1,6 +1,8 @@
 using DataAccess.Enum;
-using Kitchen.Application.Models.Requests.Momo;
+using Kitchen.Application.Handler.Transaction;
+using Kitchen.Application.Models.Requests.Payment;
 using Kitchen.Application.Models.Requests.Transaction;
+using Kitchen.Application.Utils;
 using Kitchen.Infrastructure.Services.IServices;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -14,11 +16,13 @@ public class TransactionController : ControllerBase
 {
     private IMediator _mediator;
     private IMomoService _momo;
+    private CakeTransactionHandler _handler;
 
-    public TransactionController(IMediator mediator, IMomoService momo)
+    public TransactionController(IMediator mediator, IMomoService momo, CakeTransactionHandler handler)
     {
         _mediator = mediator;
         _momo = momo;
+        _handler = handler;
     }
 
     /// <summary>
@@ -30,16 +34,22 @@ public class TransactionController : ControllerBase
     [HttpPost("add")]
     public async Task<IActionResult> AddTransaction(CreateTransactionRequest dto, PaymentType type)
     {
-        var id = await _mediator.Send(dto);
+        if (type == 0)
+        {
+            return BadRequest("Vui lòng chọn payment type");
+        }
+
+        var transaction = await _mediator.Send(dto);
         switch (type)
         {
-            case PaymentType.Cash:
+            case PaymentType.Momo:
+                return await CreateQrMomo(transaction.Id);
+            case PaymentType.Cake:
+                EmailUtils.IsReadMail = true;
                 return Ok(new
                 {
-                    TransactionId = id
+                    Content = "Member-" + transaction.TransactionCode
                 });
-            case PaymentType.Momo:
-                return await CreateQrMomo(id);
         }
 
         return Ok();
@@ -70,10 +80,23 @@ public class TransactionController : ControllerBase
     public async Task<IActionResult> MomoReturnAsync([FromQuery] MomoResultRequest dto)
     {
         await _mediator.Send(dto);
+        return Redirect("https://kitchen-buddy-two.vercel.app/pages/homepage.html");
+    }
+
+    /// <summary>
+    /// Thanh toán thủ công nếu payement auto không hoạt động
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("cake")]
+    public async Task<IActionResult> Cake()
+    {
+        EmailUtils.IsReadMail = true;
+        await _handler.CheckCakeEmail();
         return Ok(new
         {
-            Message = "Payment successful"
+            Message = "Payment By Cake Successful"
         });
+        //var result =await EmailUtils.ReadEmailAsyncTest();
+        //return Ok(result);
     }
-    
 }

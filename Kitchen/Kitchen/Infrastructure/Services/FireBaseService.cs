@@ -92,7 +92,6 @@ public class FireBaseService : IFirebaseService
         }
         catch (Exception e)
         {
-            throw new NotFoundException("Message: " + e);
             return null;
         }
     }

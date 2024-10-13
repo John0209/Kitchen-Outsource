@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Application.ErrorHandlers;
 using Kitchen.Application.Gateway.IConfiguration;
-using Kitchen.Application.Models.Requests.Momo;
+using Kitchen.Application.Models.Requests.Payment;
 using Kitchen.Application.Models.Responses.Momo;
 using Kitchen.Application.UnitOfWork;
 using Kitchen.Application.Utils;
@@ -39,7 +39,7 @@ public class MomoService : IMomoService
             var responseData = JsonConvert.DeserializeObject<MomoPaymentResponse>(responseContent);
             // return QRcode
             if (responseData?.resultCode == 0)
-                return responseData.qrCodeUrl;
+                return responseData.payUrl;
             throw new NotImplementException($"Create QR Momo failed in GetLinkMomoGateway function: {responseData?.message}");
         }
 

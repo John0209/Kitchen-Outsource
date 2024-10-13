@@ -8,6 +8,7 @@ namespace Kitchen.Application.UnitOfWork;
 
 public class UnitOfWork : IUnitOfWork
 {
+    private bool _disposed = false;
     public UnitOfWork(AppDbContext context, IUserRepository userRepository, IAdminRepository adminRepository, IRecipeRepository recipeRepository, IPostRepository postRepository,
         ICommentRepository commentRepository, IPlanRepository planRepository, IExpertRepository expertRepository, ITransactionRepository transactionRepository)
     {
@@ -24,7 +25,24 @@ public class UnitOfWork : IUnitOfWork
 
     public void Dispose()
     {
-        throw new NotImplementedException();
+        Dispose(true);
+        GC.SuppressFinalize(this); // Ngăn không cho garbage collector gọi finalizer
+    }
+
+    private void Dispose(bool disposing)
+    {
+        if (!_disposed)
+        {
+            if (disposing)
+            {
+                // Giải phóng các đối tượng quản lý
+                _context?.Dispose();
+            }
+
+            // Giải phóng các đối tượng không quản lý nếu cần
+
+            _disposed = true;
+        }
     }
 
     private readonly AppDbContext _context;

@@ -12,7 +12,8 @@ public static class UserMapper
     {
         UserId = dto.Id,
         Name = dto.UserName,
-        Email = dto.Email
+        Email = dto.Email,
+        IsMember = dto.IsMember
     };
 
     public static RegisterResponse UserToRegisterDtoResponse(User dto) => new RegisterResponse()
@@ -34,6 +35,10 @@ public static class UserMapper
         DateOfBirth = DateUtils.FormatDateTimeToDateV1(dto.DateOfBirth),
         CreateDate = DateUtils.FormatDateTimeToDatetimeV1(dto.CreateDate),
         Gender = dto.Gender,
-        Status = dto.Status
+        Status = dto.Status,
+        StartDateMember = dto.StartDateMember,
+        ExpireDateMember = dto.ExpireDateMember,
+        TotalDays = dto.TotalDays,
+        IsMember = dto.IsMember
     };
 }

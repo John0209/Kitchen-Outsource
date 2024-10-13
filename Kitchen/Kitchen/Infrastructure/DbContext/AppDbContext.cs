@@ -1,3 +1,4 @@
+using Actor.Infrastructure.Enum;
 using Kitchen.Infrastructure.Entities;
 using Kitchen.Infrastructure.Enum;
 using Microsoft.EntityFrameworkCore;
@@ -52,6 +53,14 @@ public class AppDbContext : Microsoft.EntityFrameworkCore.DbContext
 
         modelBuilder.Entity<Expert>().HasData(
             new Expert() { Id = 1, Name = "John Expert", Email = "expert@gmail.com", Password = "12345" }
+        );
+
+        modelBuilder.Entity<User>().HasData(
+            new User()
+            {
+                Id = 1, UserName = "John Vũ", Email = "long88ka@gmail.com", Password = "12345",
+                CreateDate = DateTime.Now, PhoneNumber = "0397528860", Status = UserStatus.Verified
+            }
         );
     }
 }
